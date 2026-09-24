@@ -6,9 +6,8 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/omni_penang.mk
+    $(LOCAL_DIR)/twrp_penang.mk
 
 COMMON_LUNCH_CHOICES := \
-    omni_penang-user \
-    omni_penang-userdebug \
-    omni_penang-eng
+    twrp_penang-eng \
+    twrp_penang-userdebug
