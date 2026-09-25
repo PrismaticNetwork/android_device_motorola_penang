@@ -99,18 +99,16 @@ TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
 TW_INCLUDE_REPACKTOOLS := true
 
-# TWRP Touchscreen Configuration (Based on AOSP/EvolutionX)
-TW_RECOVERY_ADDITIONAL_RELPROP := true
-TW_INCLUDE_NTFS_3G := false
-TW_INPUT_BLACKLIST := "hbtp_vm"
+# Qualcomm Hardware & Energy HAL (Fix Bateria)
+BOARD_HAL_STATIC_LIBRARIES := libhealth_charger_twm
+PRODUCT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 
-# Permite ao TWRP ler os drivers de toque do ramdisk da Qualcomm
-BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 100663296
-BOARD_FLASH_BLOCK_SIZE := 131072
+# Drivers de Inicializacao do Touch da Motorola (Fix Touch)
+BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.recovery 2>/dev/null))
+BOOT_KERNEL_MODULES := $(BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD)
 
-# Copia os módulos do Kernel da ROM para dentro do ramdisk do TWRP
-BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat device/motorola/penang/modules.load.recovery 2>/dev/null))
-
-# Força o TWRP a liberar os inputs de toque do barramento Qualcomm Holi
+# Flags de Liberacao de Inputs do TWRP
 TW_RECOVERY_ADDITIONAL_RELPROP := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
+TW_SCREEN_BLANK_ON_BOOT := true
+
