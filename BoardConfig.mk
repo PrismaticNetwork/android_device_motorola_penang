@@ -98,3 +98,12 @@ TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
 TW_INCLUDE_REPACKTOOLS := true
+
+# TWRP Touchscreen Configuration (Based on AOSP/EvolutionX)
+TW_RECOVERY_ADDITIONAL_RELPROP := true
+TW_INCLUDE_NTFS_3G := false
+TW_INPUT_BLACKLIST := "hbtp_vm"
+
+# Permite ao TWRP ler os drivers de toque do ramdisk da Qualcomm
+BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 100663296
+BOARD_FLASH_BLOCK_SIZE := 131072
