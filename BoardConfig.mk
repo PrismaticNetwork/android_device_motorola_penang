@@ -100,7 +100,7 @@ TW_USE_TOOLBOX := true
 TW_INCLUDE_REPACKTOOLS := true
 
 # Qualcomm Hardware & Energy HAL (Fix Bateria)
-BOARD_HAL_STATIC_LIBRARIES := libhealth_charger_twm
+# BOARD_HAL_STATIC_LIBRARIES := libhealth_charger_twm
 PRODUCT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 
 # Drivers de Inicializacao do Touch da Motorola (Fix Touch)
