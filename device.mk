@@ -87,10 +87,3 @@ PRODUCT_SOONG_NAMESPACES += \
 # Copy modules for depmod
 PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*.ko,$(LOCAL_PATH)/prebuilt/modules,$(TARGET_COPY_OUT_RECOVERY)/root/vendor/lib/modules/1.1)
 
-# Servicos de Leitura de Bateria e Processamento de Toque
-PRODUCT_PACKAGES += \
-    android.hardware.health@2.1-impl \
-    android.hardware.health@2.1-service \
-    android.hardware.health-service.twrp \
-    android.hardware.input.processor
-
