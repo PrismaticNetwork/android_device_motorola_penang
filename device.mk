@@ -91,3 +91,11 @@ PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*.ko,$(LOCAL_PATH)/prebuilt/
 PRODUCT_PACKAGES += \
     android.hardware.input.processor
 
+# Habilita os serviços do sistema para ler o painel de toque e a porcentagem da bateria
+PRODUCT_PACKAGES += \
+    android.hardware.health@2.1-impl \
+    android.hardware.health@2.1-service \
+    android.hardware.health-service.twrp \
+    android.hardware.input.processor
+
+
