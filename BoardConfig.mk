@@ -107,3 +107,10 @@ TW_INPUT_BLACKLIST := "hbtp_vm"
 # Permite ao TWRP ler os drivers de toque do ramdisk da Qualcomm
 BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 100663296
 BOARD_FLASH_BLOCK_SIZE := 131072
+
+# Copia os módulos do Kernel da ROM para dentro do ramdisk do TWRP
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat device/motorola/penang/modules.load.recovery 2>/dev/null))
+
+# Força o TWRP a liberar os inputs de toque do barramento Qualcomm Holi
+TW_RECOVERY_ADDITIONAL_RELPROP := true
+TW_INPUT_BLACKLIST := "hbtp_vm"
