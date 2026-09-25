@@ -86,3 +86,8 @@ PRODUCT_SOONG_NAMESPACES += \
 
 # Copy modules for depmod
 PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*.ko,$(LOCAL_PATH)/prebuilt/modules,$(TARGET_COPY_OUT_RECOVERY)/root/vendor/lib/modules/1.1)
+
+# Injetar serviços de input para o painel de toque no ramdisk
+PRODUCT_PACKAGES += \
+    android.hardware.input.processor
+
