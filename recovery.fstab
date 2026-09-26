@@ -1,14 +1,30 @@
-/system         ext4      system                                     flags=display=system;logical;slotselect
-/system         erofs     system                                     flags=display=system;logical;slotselect
-/system_ext     ext4      system_ext                                 flags=display=system_ext;logical;slotselect
-/system_ext     erofs     system_ext                                 flags=display=system_ext;logical;slotselect
-/product        ext4      product                                    flags=display=product;logical;slotselect
-/product        erofs     product                                    flags=display=product;logical;slotselect
-/vendor         ext4      vendor                                     flags=display=vendor;logical;slotselect
-/vendor         erofs     vendor                                     flags=display=vendor;logical;slotselect
-/odm            ext4      odm                                        flags=display=odm;logical;slotselect
+# recovery.fstab — device/motorola/penang
+#
+# Correções aplicadas em relação ao original gerado pelo twrpdtgen:
+#   1. fsflags=ro adicionado em todas as partições lógicas somente-leitura
+#      (system, system_ext, product, vendor, odm) — erofs é read-only por
+#      natureza, e sem essa flag o TWRP tenta montar RW e leva
+#      "Permission denied" (confirmado nos logs).
+#   2. Adicionada a variante erofs para /odm (só tinha ext4).
+#   3. Flags de criptografia FBE/metadata adicionadas em /data, usando os
+#      valores REAIS vistos no recovery.log anterior (fbe.filenames,
+#      metadata.contents, metadata.filenames) — não são valores inventados.
+#
+# NÃO testado ainda — revise antes de buildar. Se algum nome de partição ou
+# path estiver diferente do seu aparelho real, ajuste antes.
+
+/system         ext4      system                                     flags=display=system;logical;slotselect;fsflags=ro
+/system         erofs     system                                     flags=display=system;logical;slotselect;fsflags=ro
+/system_ext     ext4      system_ext                                 flags=display=system_ext;logical;slotselect;fsflags=ro
+/system_ext     erofs     system_ext                                 flags=display=system_ext;logical;slotselect;fsflags=ro
+/product        ext4      product                                    flags=display=product;logical;slotselect;fsflags=ro
+/product        erofs     product                                    flags=display=product;logical;slotselect;fsflags=ro
+/vendor         ext4      vendor                                     flags=display=vendor;logical;slotselect;fsflags=ro
+/vendor         erofs     vendor                                     flags=display=vendor;logical;slotselect;fsflags=ro
+/odm            ext4      odm                                        flags=display=odm;logical;slotselect;fsflags=ro
+/odm            erofs     odm                                        flags=display=odm;logical;slotselect;fsflags=ro
 /metadata       ext4      /dev/block/bootdevice/by-name/metadata     flags=display=metadata
-/data           f2fs      /dev/block/bootdevice/by-name/userdata     flags=display=data
+/data           f2fs      /dev/block/bootdevice/by-name/userdata     flags=display=data;fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized+wrappedkey_v0;metadata_encryption=aes-256-xts:wrappedkey_v0;forceencrypt
 /sdcard         vfat      /dev/block/mmcblk1p1                       flags=display=sdcard
 /boot           emmc      /dev/block/bootdevice/by-name/boot         flags=display=boot
 /misc           emmc      /dev/block/bootdevice/by-name/misc         flags=display=misc
