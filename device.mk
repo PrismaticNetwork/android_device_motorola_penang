@@ -84,7 +84,4 @@ PRODUCT_PACKAGES += \
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
 
-# Copy modules for depmod
-PRODUCT_COPY_FILES += \
-    device/motorola/penang/prebuilt/modules/focaltech_0flash_v2_mmi.ko:$(TARGET_COPY_OUT_VENDOR)/lib/modules/1.1/focaltech_0flash_v2_mmi.ko
-
+PRODUCT_PACKAGES += focaltech_0flash_v2_mmi
