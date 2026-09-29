@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-LOCAL_PATH := device/motorola/penang_g
+   LOCAL_PATH := device/motorola/penang
 
 # Shipping level
 PRODUCT_SHIPPING_API_LEVEL := 30
