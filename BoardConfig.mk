@@ -63,7 +63,7 @@ BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 100663296
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_SYSTEMIMAGE_PARTITION_TYPE := ext4
-BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_VENDOR := vendor
 BOARD_SUPER_PARTITION_SIZE := 9126805504 # TODO: Fix hardcoded value
@@ -96,16 +96,15 @@ TW_EXTRA_LANGUAGES := true
 TW_USE_TOOLBOX := true
 TW_INCLUDE_REPACKTOOLS := true
 
-# Qualcomm Hardware & Energy HAL (Fix Bateria)
-# BOARD_HAL_STATIC_LIBRARIES := libhealth_charger_twm
-
-# Drivers de Inicializacao do Touch da Motorola (Fix Touch)
+# Recovery Modules Loading
+# Load kernel modules from ramdisk (recovery.fstab + TWRP initialization)
 BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.recovery 2>/dev/null))
 BOOT_KERNEL_MODULES := $(BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD)
 
-# Flags de Liberacao de Inputs do TWRP
+# Flags to enable TWRP input handling for touch and keys
 TW_RECOVERY_ADDITIONAL_RELPROP := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_SCREEN_BLANK_ON_BOOT := true
 
+# Load vendor modules for FocalTech touchscreen
 TW_LOAD_VENDOR_MODULES := "focaltech_0flash_v2_mmi.ko"
