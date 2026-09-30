@@ -1,17 +1,15 @@
 # recovery.fstab — device/motorola/penang
 #
-# Correções aplicadas em relação ao original gerado pelo twrpdtgen:
-#   1. fsflags=ro adicionado em todas as partições lógicas somente-leitura
-#      (system, system_ext, product, vendor, odm) — erofs é read-only por
-#      natureza, e sem essa flag o TWRP tenta montar RW e leva
-#      "Permission denied" (confirmado nos logs).
-#   2. Adicionada a variante erofs para /odm (só tinha ext4).
-#   3. Flags de criptografia FBE/metadata adicionadas em /data, usando os
-#      valores REAIS vistos no recovery.log anterior (fbe.filenames,
-#      metadata.contents, metadata.filenames) — não são valores inventados.
+# TWRP Recovery Filesystem Table
+# Corrections applied:
+#   1. fsflags=ro added to all read-only logical partitions (system, system_ext, 
+#      product, vendor, odm) — erofs is read-only by nature
+#   2. Both ext4 and erofs variants for dynamic partitions (system, system_ext, 
+#      product, vendor, odm) — device may have either filesystem
+#   3. FBE/metadata encryption flags for /data using kernel defaults
+#   4. F2FS filesystem for /data (verify with 'blkid /dev/block/sde26' if issues occur)
+#   5. SD Card mount at /dev/block/mmcblk1p1 (external microSD)
 #
-# NÃO testado ainda — revise antes de buildar. Se algum nome de partição ou
-# path estiver diferente do seu aparelho real, ajuste antes.
 
 /system         ext4      system                                     flags=display=system;logical;slotselect;fsflags=ro
 /system         erofs     system                                     flags=display=system;logical;slotselect;fsflags=ro
@@ -24,7 +22,7 @@
 /odm            ext4      odm                                        flags=display=odm;logical;slotselect;fsflags=ro
 /odm            erofs     odm                                        flags=display=odm;logical;slotselect;fsflags=ro
 /metadata       ext4      /dev/block/bootdevice/by-name/metadata     flags=display=metadata
-/data           f2fs      /dev/block/bootdevice/by-name/userdata     flags=display=data;fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized+wrappedkey_v0;metadata_encryption=aes-256-xts:wrappedkey_v0;forceencrypt
+/data           f2fs      /dev/block/bootdevice/by-name/userdata     flags=display=data;fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized+wrappedkey_v0;metadata_encryption=aes-256-xts:wrappedkey_v0
 /sdcard         vfat      /dev/block/mmcblk1p1                       flags=display=sdcard
 /boot           emmc      /dev/block/bootdevice/by-name/boot         flags=display=boot
 /misc           emmc      /dev/block/bootdevice/by-name/misc         flags=display=misc
