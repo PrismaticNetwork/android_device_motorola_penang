@@ -12,4 +12,4 @@ tcpc_class.ko
 tcpc_sgm7220.ko
 tcpc_rt1711h.ko
 rt_pd_manager.ko
-focaltech_0flash_v2_mmi.ko
+
