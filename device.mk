@@ -84,8 +84,4 @@ PRODUCT_PACKAGES += \
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
 
-# Copy modules for depmod
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*.ko,$(LOCAL_PATH)/prebuilt/modules,$(TARGET_COPY_OUT_RECOVERY)/root/vendor/lib/modules/1.1) \
-    $(LOCAL_PATH)/prebuilt/firmware/focaltech-csot-ft8057-05-0000-penang.bin:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/firmware/focaltech-csot-ft8057-05-0000-penang.bin
-
+PRODUCT_PACKAGES += focaltech_0flash_v2_mmi
